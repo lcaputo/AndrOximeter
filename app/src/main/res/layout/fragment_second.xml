@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".secondFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:paddingHorizontal="40sp"
+            >
+
+            <Button
+                android:id="@+id/HR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ritmo Cardiaco"
+                android:paddingVertical="15sp"
+                android:fontFamily="@font/montserrat"/>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/O2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Oxigenación en Sangre"
+                android:paddingVertical="15sp"
+                android:fontFamily="@font/montserrat"/>
+
+        </LinearLayout>
+
+
+</FrameLayout>
