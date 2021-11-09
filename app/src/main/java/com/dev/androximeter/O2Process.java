@@ -5,7 +5,6 @@ import static java.lang.Math.ceil;
 import static java.lang.Math.sqrt;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.Camera;
@@ -25,29 +24,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class O2Process extends Activity {
 
-    // Variables Initialization
     private static final String TAG = "HeartRateMonitor";
     private static final AtomicBoolean processing = new AtomicBoolean(false);
     private SurfaceView preview = null;
     private static SurfaceHolder previewHolder = null;
     private static Camera camera = null;
 
-    //Toast
     private Toast mainToast;
 
-    // DataBase
     public String user;
 
-    //ProgressBar
     private ProgressBar ProgO2;
     public int ProgP = 0;
     public int inc = 0;
 
-    //Freq + timer variable
     private static long startTime = 0;
     private double SamplingFreq;
 
-    // SPO2 variables
     private static final double RedBlueRatio = 0;
     double Stdr = 0;
     double Stdb = 0;
@@ -55,7 +48,6 @@ public class O2Process extends Activity {
     double sumblue = 0;
     public int o2;
 
-    //Arraylist
     public ArrayList<Double> RedAvgList = new ArrayList<Double>();
     public ArrayList<Double> BlueAvgList = new ArrayList<Double>();
     public int counter = 0;
@@ -69,10 +61,8 @@ public class O2Process extends Activity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             user = extras.getString("Usr");
-            //The key argument here must match that used in the other activity
         }
 
-        // XML - Java Connecting
         preview = findViewById(R.id.preview);
         previewHolder = preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
@@ -86,19 +76,12 @@ public class O2Process extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
-    //Prevent the system from restarting your activity during certain configuration changes,
-    // but receive a callback when the configurations do change, so that you can manually update your activity as necessary.
-    //such as screen orientation, keyboard availability, and language
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
 
 
-    //store system time as a start time for the analyzing process
-    //your activity to start interacting with the user.
-    // This is a good place to begin animations, open exclusive-access devices (such as the camera)
     @Override
     public void onResume() {
         super.onResume();
@@ -110,9 +93,6 @@ public class O2Process extends Activity {
         startTime = System.currentTimeMillis();
     }
 
-    //Called as part of the activity lifecycle when an activity is going into the background, but has not (yet) been killed. The counterpart to onResume().
-    //When activity B is launched in front of activity A,
-    // this callback will be invoked on A. B will not be created until A's onPause() returns, so be sure to not do anything lengthy here.
     @Override
     public void onPause() {
         super.onPause();
@@ -122,38 +102,31 @@ public class O2Process extends Activity {
         camera = null;
     }
 
-    //getting frames data from the camera and start the heartbeat process
     private final PreviewCallback previewCallback = new PreviewCallback() {
 
         @Override
         public void onPreviewFrame(byte[] data, Camera cam) {
-            //if data or size == null ****
             if (data == null) throw new NullPointerException();
             Camera.Size size = cam.getParameters().getPreviewSize();
             if (size == null) throw new NullPointerException();
 
-            //Atomically sets the value to the given updated value if the current value == the expected value.
             if (!processing.compareAndSet(false, true)) return;
 
-            //put width + height of the camera inside the variables
             int width = size.width;
             int height = size.height;
             double RedAvg;
             double BlueAvg;
 
-            RedAvg = ImageProcessing.decodeRedBlueGreenAvg(data.clone(), height, width, 1); //1 stands for red intensity, 2 for blue, 3 for green
+            RedAvg = ImageProcessing.decodeRedBlueGreenAvg(data.clone(), height, width, 1);
             sumred = sumred + RedAvg;
-            BlueAvg = ImageProcessing.decodeRedBlueGreenAvg(data.clone(), height, width, 2); //1 stands for red intensity, 2 for blue, 3 for green
+            BlueAvg = ImageProcessing.decodeRedBlueGreenAvg(data.clone(), height, width, 2);
             sumblue = sumblue + BlueAvg;
 
             RedAvgList.add(RedAvg);
             BlueAvgList.add(BlueAvg);
 
-            ++counter; //countes number of frames in 30 seconds
+            ++counter;
 
-            //Para comprobar si obtuvimos una buena intensidad de rojo para procesar
-            // si no volvemos a la condición y lo configuramos nuevamente
-            // hasta obtener una buena intensidad de rojo
             if (RedAvg < 200) {
                 inc = 0;
                 ProgP = inc;
@@ -162,8 +135,9 @@ public class O2Process extends Activity {
             }
 
             long endTime = System.currentTimeMillis();
-            double totalTimeInSecs = (endTime - startTime) / 1000d; //to convert time to seconds
-            if (totalTimeInSecs >= 30) { //when 30 seconds of measuring passes do the following " we chose 30 seconds to take half sample since 60 seconds is normally a full sample of the heart beat
+            double totalTimeInSecs = (endTime - startTime) / 1000d;
+            // TIEMPO
+            if (totalTimeInSecs >= 30) {
 
                 startTime = System.currentTimeMillis();
                 SamplingFreq = (counter / totalTimeInSecs);

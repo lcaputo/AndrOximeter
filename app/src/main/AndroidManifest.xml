@@ -27,11 +27,6 @@
         </activity>
 
 
-
-        <activity
-            android:name=".Primary"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".O2Result"
             android:configChanges="orientation"

@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/test/Documents/GitHub/AndrOximeter/app/src/main/res/layout/activity_heart_rate_process.xml" value="0.1" />
+        <entry key="..\:/Users/test/Documents/GitHub/AndrOximeter/app/src/main/res/layout/activity_heart_rate_result.xml" value="0.12635869565217392" />
+        <entry key="..\:/Users/test/Documents/GitHub/AndrOximeter/app/src/main/res/layout/activity_o2_process.xml" value="0.1" />
+        <entry key="..\:/Users/test/Documents/GitHub/AndrOximeter/app/src/main/res/layout/activity_o2_result.xml" value="0.12635869565217392" />
         <entry key="..\:/Users/test/Documents/GitHub/AndrOximeter/app/src/main/res/layout/activity_primary.xml" value="0.1" />
+        <entry key="..\:/Users/test/Documents/GitHub/AndrOximeter/app/src/main/res/layout/activity_start_vital_signs.xml" value="0.12635869565217392" />
         <entry key="..\:/Users/test/Documents/GitHub/AndrOximeter/app/src/main/res/layout/fragment_first.xml" value="0.22" />
         <entry key="..\:/Users/test/Documents/GitHub/AndrOximeter/app/src/main/res/layout/fragment_second.xml" value="0.15" />
         <entry key="..\:/Users/test/Documents/GitHub/AndrOximeter/app/src/main/res/layout/fragment_third.xml" value="0.18" />

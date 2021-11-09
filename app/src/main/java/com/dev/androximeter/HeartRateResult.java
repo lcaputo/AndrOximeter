@@ -18,7 +18,7 @@ import java.util.Date;
 public class HeartRateResult extends AppCompatActivity {
 
     private String user, Date;
-    int HR;
+    String HR;
     DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     Date today = Calendar.getInstance().getTime();
 
@@ -35,9 +35,9 @@ public class HeartRateResult extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            HR = bundle.getInt("bpm");
+            HR = bundle.getString("bpm");
             RHR.setText(String.valueOf(HR) + " bpm");
-            boolean insert = DB.insertData("Ritmo Cardiaco", String.valueOf(HR)+"bpm", String.valueOf(Date));
+            boolean insert = DB.insertData("Ritmo Cardiaco", String.valueOf(HR)+" bpm", String.valueOf(Date));
             if(insert==true) {
                 Toast.makeText(this, "Data Saved on Database.", Toast.LENGTH_SHORT).show();
             }else {

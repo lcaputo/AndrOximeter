@@ -42,11 +42,13 @@ public class ResultsDB extends SQLiteOpenHelper {
 
         ArrayList<String> results = new ArrayList<String>();
 
+        // CONSULTA A LA BASE DE DATOS
         Cursor  cursor = MyDB.rawQuery("select * from results",null);
 
+        // MOVER EL INDICE AL INICIO DE LA TABLA
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                String result = cursor.getString(0) + " - " + cursor.getString(1) + " | " + cursor.getString(2);
+                String result = cursor.getString(0) + " - " + cursor.getString(1) + "\n" + cursor.getString(2);
 
                 results.add(result);
                 cursor.moveToNext();
@@ -54,28 +56,5 @@ public class ResultsDB extends SQLiteOpenHelper {
         }
         return results;
     }
-
-
-    public String getService(String service) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from results where service = ?", new String[]{service});
-        cursor.moveToFirst();
-        return cursor.getString(0);
-    }
-
-    public String getResult(String result) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from results where result = ?", new String[]{result});
-        cursor.moveToFirst();
-        return cursor.getString(0);
-    }
-
-    public String getDatetime(String datetime) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from results where datetime = ?", new String[]{datetime});
-        cursor.moveToFirst();
-        return cursor.getString(0);
-    }
-
 
 }

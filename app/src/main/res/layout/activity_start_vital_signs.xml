@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat"
         android:text="Coloca tu dedo sobre \n la camara y espera \n 30 segundos"
-        android:textSize="20sp"
+        android:textSize="15dp"
         android:textAlignment="center" />
 
     <Space

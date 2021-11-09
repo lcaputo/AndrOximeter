@@ -19,8 +19,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_primary);
 
+        // NAVEGACIÓN
+
+        // REFERENCIA AL LA BARRA DE NAVEGACIÓN EN LAS VISTAS
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
 
+        // CUAL ES LA VISTA INICIAL
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new firstFragment()).commit();
         getSupportActionBar().setTitle("Home");
 
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // FUNCION PARA SALIR CUANDO SE PRESIONA EL BOTON DE ATRÁS
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
